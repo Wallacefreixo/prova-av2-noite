@@ -1,0 +1,106 @@
+Unilasalle-RJ - AV2
+Aluno: Wallace Azeredo Freixo
+Prova Av2 de Laboratorio de Sistemas Operacionais
+Professor: Alex Salgado
+1o. Semestre de 2017   Turno: Noite
+--------------------------------------------------
+1-Faça um script shell que receba um nome de arquivo como parametro e 
+responde se este arquivo existe ou não.
+
+RESPOSTA:
+
+#!/bin/bash
+arquivo=$1
+if [ -f $arquivo ]
+ then
+   echo -e "Arquivo $1, existe"
+ else
+   echo -e "Arquivo $1, não existe"
+fi
+
+
+2-Reescreva o codigo abaixo usando a estrutura for.
+#!/bin/bash
+cont=$1
+fat=1
+while [ $cont -gt 0 ] 
+do
+   fat=$(( $fat * $cont ))
+   cont=$(( $cont - 1 ))
+done
+echo $fat
+
+RESPOSTA:
+
+#!/bin/bash
+cont=$1
+fat=1
+for ((i=1; i <= $cont ; i++))
+  do
+   fat=$(($fat*$i))
+  done
+echo "O fatorial é: $fat "
+
+
+
+
+3-Usando estrutura de repetição, faça um script para exibir todos os arquivos
+da pasta atual com tamanho = 0kb (vazio).
+
+RESPOSTA:
+
+#!/bin/bash
+for arquivo in $(ls .)
+  do
+  if [ -f $arquivo ]
+   then
+    kb=$(wc -c < $arquivo)
+  if [ $kb == 0 ] 
+     then
+      echo "$arquivo"
+   fi
+  fi
+   done
+
+
+
+4-Usando estrutura de repetição, faça um script para ler a PASTA ATUAL, calcular e exibir:
+- O total de arquivos lidos
+- O total de arquivos com a extensão .txt 
+- O total de arquivos com a extensão .c
+- O total de arquivos com a extensão .py
+
+RESPOSTA:
+
+
+total=0
+txt=0
+c=0
+py=0
+
+for arquivo in $(ls .)
+do
+case "$arquivo" in
+    
+    *.txt)
+        txt=$(( $txt + 1 ))
+        total=$(( $total + 1 ))
+        ;;
+    *.c)
+        c=$(( $c + 1 )) 
+        total=$(( $total + 1 ))
+        ;;
+    *.py)
+        py=$(( $py + 1 ))
+        total=$(( $total + 1 ))
+        ;;
+    
+     *) 
+        ;;
+esac
+done
+echo "Arquivos no Total: $total"
+echo "Arquivos no formato Texto: $txt"
+echo "Arquivos no formato  C: $c"
+echo "Arquivos no formato  PY: $py"
+
